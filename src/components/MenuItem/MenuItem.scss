@@ -7,13 +7,8 @@
   justify-content: center;
   border: 1px solid black;
   margin: 0 7.5px 15px;
-  // to make the background div inside absolute relative to it's parent
   position: relative;
-  // to remove the overflow of the background
   overflow: hidden;
-
-  // some changes to make a hover effect for the background
-  // we could have added the position to the content class 
 
   & .background-image {
     width: 100%;

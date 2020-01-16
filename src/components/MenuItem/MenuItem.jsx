@@ -1,9 +1,16 @@
+import { withRouter } from "react-router-dom";
 import React from "react";
 import "./MenuItem.scss";
 
-const MenuItem = ({ title, imageUrl, size }) => {
+// withRouter is HOC that will give us access to the router object
+// the router object properties can be accessed from props like. history
+
+const MenuItem = ({ title, imageUrl, size, linkUrl, history, match }) => {
   return (
-    <div className={`${size} menu-item`}>
+    <div
+      className={`${size} menu-item`}
+      onClick={() => history.push(`${match.url}${linkUrl}`)}
+    >
       <div
         style={{
           backgroundImage: `url(${imageUrl})`
@@ -18,4 +25,4 @@ const MenuItem = ({ title, imageUrl, size }) => {
   );
 };
 
-export default MenuItem;
+export default withRouter(MenuItem);

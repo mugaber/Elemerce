@@ -1,12 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import 'font-awesome/css/font-awesome.css'
-import 'bootstrap-social/bootstrap-social.css'
+import { BrowserRouter } from "react-router-dom";
+import ReactDOM from "react-dom";
+import React from "react";
+import "./index.css";
+import App from "./App";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// added Browser router to use the functionality of react-router
+// for more url and routes in the application
 
-serviceWorker.unregister();
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
+);
