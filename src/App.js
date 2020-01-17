@@ -60,7 +60,6 @@ class App extends Component {
   }
 }
 
-// if the user signin redirect him to the main page
 
 const mapStateToProps = ({ user }) => ({
   currentUser: user.currentUser

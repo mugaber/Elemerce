@@ -1,9 +1,14 @@
-import { ReactComponent as Logo } from "../../assets/crown.svg";
-import { connect } from "react-redux";
-import { auth } from "../../firebase/firebase.utils";
-import { Link } from "react-router-dom";
 import React from "react";
 import "./Header.scss";
+
+import { ReactComponent as Logo } from "../../assets/crown.svg";
+import CartDropdown from "../CartDropdown/CartDropdown";
+import CartIcon from "../CartIcon/CartIcon";
+
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
+import { auth } from "../../firebase/firebase.utils";
 
 const Header = ({ currentUser }) => {
   return (
@@ -27,12 +32,12 @@ const Header = ({ currentUser }) => {
             Sign in
           </Link>
         )}
+        <CartIcon />
       </div>
+      <CartDropdown />
     </div>
   );
 };
-
-// using connect to provide the currentUser from the store
 
 const mapStateToProps = state => ({
   currentUser: state.user.currentUser
