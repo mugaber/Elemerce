@@ -18,14 +18,10 @@ class App extends Component {
   unSubscribeFromAuth = null;
 
   componentDidMount() {
-    // when there is a change in the auth from firebase (signin with google)
-    // call creerateuserprofile and update the state of the current user
     this.unSubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      // when logging in will return userAuth object
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
-        // take a snapshot from the userRef object that have the info
         userRef.onSnapshot(snapShot => {
           this.setState({
             currentUser: {
@@ -34,7 +30,6 @@ class App extends Component {
             }
           });
         });
-        // when logging out the auth.onChange will return null
       } else {
         this.setState({ currentUser: userAuth });
       }
