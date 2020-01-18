@@ -39,8 +39,6 @@ const Checkout = ({ cartItems, cartTotal }) => {
   );
 };
 
-// to select only these specific things from the state
-
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
   cartTotal: selectCartTotal
