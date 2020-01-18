@@ -36,13 +36,9 @@ const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems
 });
 
-// dispatch is available anyway as a prop for the component
-
 const mapDispatchToProps = dispatch => ({
   toggleCart: () => dispatch(toggleCart())
 });
-
-// to make the history object from the route available
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(CartDropdown)
