@@ -12,6 +12,9 @@ import ShopPage from "./pages/shop/shop";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { connect } from "react-redux";
 
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "./redux/user/user.selectors";
+
 class App extends Component {
   unSubscribeFromAuth = null;
 
@@ -60,9 +63,8 @@ class App extends Component {
   }
 }
 
-
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({
