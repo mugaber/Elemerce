@@ -1,10 +1,11 @@
 import React from "react";
 import "./CustomButton.scss";
 
-const CustomButton = ({ children, isGoogle, ...otherProps }) => {
+const CustomButton = ({ children, isGoogle, inverted, ...otherProps }) => {
   return (
     <button
-      className={`${isGoogle ? "google" : ""} custom-button`}
+      className={`${inverted ? "inverted" : ""} 
+      ${isGoogle ? "google" : ""} custom-button`}
       {...otherProps}
     >
       {children}
