@@ -7,8 +7,6 @@ export const selectCollections = createSelector(
   shop => shop.collections
 );
 
-// to extract the data from the collections object
-
 export const selectCollectionsData = createSelector(
   [selectCollections],
   collections => Object.keys(collections).map(key => collections[key])

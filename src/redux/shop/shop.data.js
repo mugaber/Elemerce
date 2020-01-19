@@ -1,5 +1,3 @@
-// turned the array into object for data normalization and 
-// fast retrival using key for O(1) data querying
 const SHOP_DATA = {
   hats: {
     id: 1,
