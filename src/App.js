@@ -4,8 +4,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import {
   auth,
-  createUserProfileDocument,
-  addCollectionAndDocuments
+  createUserProfileDocument
 } from "./firebase/firebase.utils";
 
 import Header from "./components/Header/Header";
@@ -27,7 +26,7 @@ class App extends Component {
   unSubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser, collectionsArray } = this.props;
+    const { setCurrentUser } = this.props;
 
     this.unSubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -43,10 +42,6 @@ class App extends Component {
         setCurrentUser(userAuth);
       }
 
-      addCollectionAndDocuments(
-        "collections",
-        collectionsArray.map(({ title, items }) => ({ title, items }))
-      );
     });
   }
 

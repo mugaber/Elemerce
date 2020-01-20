@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCollectionsData } from "../../redux/shop/shop.selectors";
 
+//
+
 const CollectionsOverview = ({ collections }) => (
   <div className="collections">
     {collections.map(({ id, ...restProps }) => (
