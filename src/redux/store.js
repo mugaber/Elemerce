@@ -1,14 +1,13 @@
-import { createStore, applyMiddleware } from "redux";
-import rootReducer from "./root-reducer";
-import logger from "redux-logger";
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from './root-reducer';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
-import { persistStore } from "redux-persist";
+import { persistStore } from 'redux-persist';
 
-const middleWares = [];
+const middleWares = [thunk];
 
-// to remove redux logger from production build
-
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === 'development') {
   middleWares.push(logger);
 }
 

@@ -1,22 +1,17 @@
-import React from "react";
-import "./shop";
+import React from 'react';
+import './shop';
 
-import { Route } from "react-router-dom";
+import { Route } from 'react-router-dom';
 
-import { connect } from "react-redux";
-import { updateCollections } from "../../redux/shop/shop.actions";
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { fetchCollectionsAsync } from '../../redux/shop/shop.actions';
 
-import CollectionsOverview from "../../components/CollectionsOverview/CollectionsOverview";
-import CollectionPage from "../collection/Collection";
+import CollectionsOverview from '../../components/CollectionsOverview/CollectionsOverview';
+import CollectionPage from '../collection/Collection';
 
-import {
-  firestore,
-  convertCollectionsSnapshotToMap
-} from "../../firebase/firebase.utils";
-
-//
-
-import WithSpinner from "../../components/WithSpinner/WithSpinner";
+import WithSpinner from '../../components/WithSpinner/WithSpinner';
+import { selectIsCollectionFetching } from '../../redux/shop/shop.selectors';
 
 const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
 const CollectionPageWithSpinner = WithSpinner(CollectionPage);
@@ -24,68 +19,34 @@ const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 //
 
 class ShopPage extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loading: true
-    };
-  }
-
-  unsubscribeFromSnapshot = null;
-
   componentDidMount() {
-    const { updateCollections } = this.props;
-
-    const collectionRef = firestore.collection("collections");
-
-    // this is using observable and observere pattern that is listening
-    // in the firestore to any changes and it will fire the funciton
-    // this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapShot => {
-    //   const collectionMap = convertCollectionsSnapshotToMap(snapShot);
-
-    //   updateCollections(collectionMap);
-    //   this.setState({
-    //     loading: false
-    //   });
-    // });
-
-    // we can use the promise way that is going to fire only when comp mounts
-    collectionRef.get().then(snapShot => {
-      const collectionMap = convertCollectionsSnapshotToMap(snapShot);
-
-      updateCollections(collectionMap);
-      this.setState({
-        loading: false
-      });
-    });
-
-    // we even can call the firestore as an API using fetch
-    // fetch(
-    //   "https://firestore.googleapis.com/v1/projects/ecommerce-app-web/databases/(default)/documents/cities/LA"
-    // )
-    //   .then(response => response.json())
-    //   .then(collections => console.log(collections));
+    const { fetchCollectionsAsync } = this.props;
+    fetchCollectionsAsync();
   }
 
   render() {
-    const { match } = this.props;
-    const { loading } = this.state;
+    const { match, isCollectionFetching } = this.props;
 
     return (
-      <div className="shop-page">
+      <div className='shop-page'>
         <Route
           exact
           path={`${match.path}`}
           render={props => (
-            <CollectionsOverviewWithSpinner isLoading={loading} {...props} />
+            <CollectionsOverviewWithSpinner
+              isLoading={isCollectionFetching}
+              {...props}
+            />
           )}
         />
         <Route
           exact
           path={`${match.path}/:collectionId`}
           render={props => (
-            <CollectionPageWithSpinner isLoading={loading} {...props} />
+            <CollectionPageWithSpinner
+              isLoading={isCollectionFetching}
+              {...props}
+            />
           )}
         />
       </div>
@@ -93,9 +54,12 @@ class ShopPage extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  updateCollections: collectionsMap =>
-    dispatch(updateCollections(collectionsMap))
+const mapStateToPorps = createStructuredSelector({
+  isCollectionFetching: selectIsCollectionFetching
 });
 
-export default connect(null, mapDispatchToProps)(ShopPage);
+const mapDispatchToProps = dispatch => ({
+  fetchCollectionsAsync: () => dispatch(fetchCollectionsAsync())
+});
+
+export default connect(mapStateToPorps, mapDispatchToProps)(ShopPage);
