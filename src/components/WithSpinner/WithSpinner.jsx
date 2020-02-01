@@ -1,7 +1,5 @@
-import React from "react";
-import { SpinnerContainer, SpinnerOverlay } from "./WithSpinner.styles";
-
-// HOC to render either a spinner or the Wrapped Comp based of a condition
+import React from 'react';
+import { SpinnerContainer, SpinnerOverlay } from './WithSpinner.styles';
 
 const WithSpinner = WrappedComponent => ({ isLoading, ...otherProps }) =>
   isLoading ? (
