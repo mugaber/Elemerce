@@ -39,7 +39,19 @@ class ShopPage extends React.Component {
 
     const collectionRef = firestore.collection("collections");
 
-    this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapShot => {
+    // this is using observable and observere pattern that is listening
+    // in the firestore to any changes and it will fire the funciton
+    // this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapShot => {
+    //   const collectionMap = convertCollectionsSnapshotToMap(snapShot);
+
+    //   updateCollections(collectionMap);
+    //   this.setState({
+    //     loading: false
+    //   });
+    // });
+
+    // we can use the promise way that is going to fire only when comp mounts
+    collectionRef.get().then(snapShot => {
       const collectionMap = convertCollectionsSnapshotToMap(snapShot);
 
       updateCollections(collectionMap);
@@ -47,6 +59,13 @@ class ShopPage extends React.Component {
         loading: false
       });
     });
+
+    // we even can call the firestore as an API using fetch
+    // fetch(
+    //   "https://firestore.googleapis.com/v1/projects/ecommerce-app-web/databases/(default)/documents/cities/LA"
+    // )
+    //   .then(response => response.json())
+    //   .then(collections => console.log(collections));
   }
 
   render() {
