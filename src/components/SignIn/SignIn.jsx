@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 
 import CustomButton from '../CustomButton/CustomButton';
 import FormInput from '../FormInput/FormInput';
-import { googleSignInStart } from '../../redux/user/user.actions';
+import {
+  googleSignInStart,
+  emailSignInStart
+} from '../../redux/user/user.actions';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -22,14 +25,10 @@ class SignIn extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    // const { email, password } = this.state;
+    const { emailSignInStart } = this.props;
+    const { email, password } = this.state;
 
-    // try {
-    //   await auth.signInWithEmailAndPassword(email, password);
-    // } catch (error) {
-    //   console.error(error);
-    // }
-    // this.setState({ email: '', password: '' });
+    emailSignInStart(email, password);
   };
 
   render() {
@@ -71,7 +70,9 @@ class SignIn extends React.Component {
 }
 
 const mapDispatchToPorps = dispatch => ({
-  googleSignInStart: () => dispatch(googleSignInStart())
+  googleSignInStart: () => dispatch(googleSignInStart()),
+  emailSignInStart: (email, password) =>
+    dispatch(emailSignInStart({ email, password }))
 });
 
 export default connect(null, mapDispatchToPorps)(SignIn);

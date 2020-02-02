@@ -23,6 +23,16 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
+// to check user session
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+
 // if the user logged in create a profile and save it in the firestore
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   // if the user is logging out
