@@ -1,24 +1,20 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-import { Switch, Route, Redirect } from "react-router-dom";
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
-import {
-  auth,
-  createUserProfileDocument
-} from "./firebase/firebase.utils";
+import Header from './components/Header/Header';
+import HomePage from './pages/HomePage/HomePage';
+import ShopPage from './pages/shop/shop';
+import SignInSignUp from './pages/SignInSignUp/SignInSignUp';
+import Checkout from './components/Checkout/Checkout';
 
-import Header from "./components/Header/Header";
-import HomePage from "./pages/HomePage/HomePage";
-import ShopPage from "./pages/shop/shop";
-import SignInSignUp from "./pages/SignInSignUp/SignInSignUp";
-import Checkout from "./components/Checkout/Checkout";
+import { setCurrentUser } from './redux/user/user.actions';
+import { connect } from 'react-redux';
 
-import { setCurrentUser } from "./redux/user/user.actions";
-import { connect } from "react-redux";
-
-import { createStructuredSelector } from "reselect";
-import { selectCurrentUser } from "./redux/user/user.selectors";
-import { selectCollectionsData } from "./redux/shop/shop.selectors";
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from './redux/user/user.selectors';
+import { selectCollectionsData } from './redux/shop/shop.selectors';
 
 //
 
@@ -41,7 +37,6 @@ class App extends Component {
       } else {
         setCurrentUser(userAuth);
       }
-
     });
   }
 
@@ -56,14 +51,14 @@ class App extends Component {
       <div>
         <Header />
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path='/' component={HomePage} />
+          <Route path='/shop' component={ShopPage} />
+          <Route exact path='/checkout' component={Checkout} />
           <Route
             exact
-            path="/signin"
+            path='/signin'
             render={() =>
-              currentUser ? <Redirect to="/" /> : <SignInSignUp />
+              currentUser ? <Redirect to='/' /> : <SignInSignUp />
             }
           />
         </Switch>
