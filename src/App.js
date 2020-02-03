@@ -21,10 +21,8 @@ class App extends Component {
     const { checkUserSession } = this.props;
     checkUserSession();
   }
-
   render() {
     const { currentUser } = this.props;
-
     return (
       <div>
         <Header />
