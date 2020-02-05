@@ -43,7 +43,6 @@ class App extends Component {
 
   render() {
     const { currentUser } = this.state;
-
     return (
       <div>
         <UserContext.Provider value={currentUser}>
