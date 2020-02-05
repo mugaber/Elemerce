@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage/HomePage';
 import ShopPage from './pages/shop/shop';
 import SignInSignUp from './pages/SignInSignUp/SignInSignUp';
 import Checkout from './components/Checkout/Checkout';
+import { GlobalStyles } from './global-styles';
 
 import { connect } from 'react-redux';
 import { checkUserSession } from './redux/user/user.actions';
@@ -21,6 +22,7 @@ const App = ({ checkUserSession, currentUser }) => {
 
   return (
     <div>
+      <GlobalStyles />
       <Header />
       <Switch>
         <Route exact path='/' component={HomePage} />
