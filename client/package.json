@@ -1,12 +1,10 @@
 {
-  "name": "Ecommerce-app",
-  "version": "0.1.0",
+  "name": "elemerce",
+  "version": "1.0.0",
   "private": true,
+  "author": "MuGaber",
   "proxy": "http://localhost:5000",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "bootstrap-social": "^5.1.1",
@@ -36,11 +34,16 @@
     "reselect": "^4.0.0",
     "styled-components": "^5.0.0"
   },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node node_modules/react-scripts/scripts/start.js",
+    "build": "node node_modules/react-scripts/scripts/build.js",
+    "test": "node node_modules/react-scripts/scripts/test.js",
+    "eject": "node node_modules/react-scripts/scripts/eject.js"
   },
   "eslintConfig": {
     "extends": "react-app"

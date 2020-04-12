@@ -1,6 +1,9 @@
 {
-  "name": "crwn-clothing-server",
+  "name": "elemerce-server",
   "version": "1.0.0",
+  "author": "mg",
+  "description": "small ecommerce",
+  "license": "MIT",
   "engines": {
     "node": "13.7.0",
     "npm": "6.13.6"
