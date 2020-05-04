@@ -1,2 +1,1 @@
-- apply lazy loading and chunking using react lazy and suspense
-- added ErrorBoundary for HomePage for a callback component
+- some styling changes to checkout item
